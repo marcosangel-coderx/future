@@ -13,6 +13,7 @@ const initialState: AuthState = {
 type AuthContextType = {
   auth: AuthState;
   login: (email: string, password: string, remember?: boolean) => Promise<void>;
+  register: (name: string, email: string, password: string, companyName: string, role: string) => Promise<void>;
   logout: () => void;
   checkLocation: (latitude: number, longitude: number) => boolean;
 };
@@ -156,8 +157,45 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return deg * (Math.PI/180);
   };
 
+  const register = async (name: string, email: string, password: string, companyName: string, role: string) => {
+    setAuth(prev => ({ ...prev, isLoading: true, error: null }));
+    
+    try {
+      await simulateApiCall(null, 1000); // Simulate API call
+      
+      // In a real app, this would create a new user and company in the database
+      // For now, we'll just simulate success
+      
+      // Check if email already exists
+      if (email === superAdminUser.email || email === companyAdminUser.email) {
+        setAuth(prev => ({
+          ...prev,
+          isLoading: false,
+          error: 'Email already in use',
+        }));
+        return;
+      }
+      
+      // Simulate successful registration
+      setAuth(prev => ({
+        ...prev,
+        isLoading: false,
+        error: null,
+      }));
+      
+      // In a real app, we might auto-login the user or redirect to login
+      // For now, we'll just return success and let the component handle it
+    } catch (error) {
+      setAuth(prev => ({
+        ...prev,
+        isLoading: false,
+        error: 'An error occurred during registration',
+      }));
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ auth, login, logout, checkLocation }}>
+    <AuthContext.Provider value={{ auth, login, register, logout, checkLocation }}>
       {children}
     </AuthContext.Provider>
   );

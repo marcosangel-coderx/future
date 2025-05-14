@@ -69,6 +69,12 @@ const Login: React.FC = () => {
               create a new account
             </Link>
           </p>
+          <p className="mt-2 text-sm text-gray-600">
+            Or{' '}
+            <Link to="/register" className="font-medium text-blue-900 hover:text-blue-800">
+              create a new account
+            </Link>
+          </p>
         </div>
 
         <Card>

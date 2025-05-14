@@ -22,6 +22,7 @@ const Security = React.lazy(() => import('./pages/dashboard/company/Security'));
 // Public Pages
 import Home from './pages/public/Home';
 import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
 
 // Company Dashboard Pages
 import CompanyDashboard from './pages/dashboard/company/Dashboard';
@@ -43,6 +44,7 @@ const App: React.FC = () => {
           <Route path="/" element={<PublicLayout />}>
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
             {/* Add other public routes as needed */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
